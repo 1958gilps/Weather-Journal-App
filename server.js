@@ -48,7 +48,7 @@ function saveData (req, res) {
         date: req.body.date,
         temp: req.body.temp,
         input: req.body.input,
-        city: req.body.zip
+        zip: req.body.zip
     }
     projectData.push(newEntry);
     res.send(projectData);

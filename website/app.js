@@ -16,7 +16,7 @@ let newDate = d.getMonth()+'-'+ d.getDate()+'-'+ d.getFullYear(); // note zero b
 
 function performAction (e) {
     getWeather(`${baseURL}${zip}${key}`) // jumps to getWeather
-    .then(function(apiData) {
+    .then(function(apiData) { // apiData = {coord: {…}, weather: Array(1), base: "stations", main: {…}, visibility: 16093, ...}
         const input = document.getElementById('feelings').value; // reads the feelings entered
       postData('/saveData',{date: newDate, temp: apiData.temp, input: input, zip: apiData.zip}) // jumps to postData
       //postData('/saveData',{date: newDate, temp: apiData.main.temp, input: input,zip: apiData.name})
@@ -27,9 +27,10 @@ function performAction (e) {
 };
 
 //GET async
-const getWeather = async (url) =>{
-    const zip = document.getElementById('zip').value; // reads the zip code entered
-    const response = await fetch (`${baseURL}${zip}${key}`); // http://api.openweathermap.org/data/2.5/weather?zip=01754f5df508e3320a305491c8da09aba3fd8
+const getWeather = async (url) =>{ // url = "http://api.openweathermap.org/data/2.5/weather?q=[object HTMLInputElement]&APPID=f5df508e3320a305491c8da09aba3fd8"
+
+    const zip = document.getElementById('zip').value; // reads the zip code entered // zip = "01754"
+    const response = await fetch (`${baseURL}${zip}${key}`); // url
     try {
         const apiData = response.json();
         //console.log('getWeather from this URL:'+`${baseURL}${zip}${key}`);
@@ -42,7 +43,7 @@ const getWeather = async (url) =>{
 };
 
 //POST async
-const postData = async function ( url='',data = {}) {
+const postData = async function ( url='',data = {}) { // url = "/saveData", data = {date: "2-21-2020", temp: undefined, input: "ghjklhbgvgkllllllllllllllllllllll", zip: undefined
     const res = await fetch (url, {
         method:'POST',
         credentials:'same-origin',
@@ -54,6 +55,7 @@ const postData = async function ( url='',data = {}) {
 
     try {
         const newData = res.json();
+        console.log(newData);
         return newData;
     }catch (error){
         console.log('There is an error in the POST update...'+ error);
@@ -66,11 +68,11 @@ const updateUI = async () => {
     try{
         const serverData = await request.json()
         console.log(serverData);
-        console.log(serverData[-1]);
-        document.getElementById('name').innerHTML = serverData[serverData.length-1].zip;
+        console.log(serverData[0]);
+        document.getElementById('zip').innerHTML = serverData[serverData.length-1].zip;
         document.getElementById('date').innerHTML = serverData[serverData.length-1].date;
         document.getElementById('temp').innerHTML = serverData[serverData.length-1].temp+'°C';
-        document.getElementById('content').innerHTML = serverData[serverData.length-1].input;
+        document.getElementById('input').innerHTML = serverData[serverData.length-1].input;
 
     }catch (error){
         console.log('There is an error in the UI update...'+ error);
