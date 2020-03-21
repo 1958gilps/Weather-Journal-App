@@ -42,17 +42,20 @@ function sendData (req, res) {
 
 //POST
 app.post('/saveData', saveData);
+// console.log('SaveData= '+saveData);
+
 function saveData (req, res) {
 
-    newEntry = {
+    const newEntry = {
         date: req.body.date,
         temp: req.body.temp,
         input: req.body.input,
         zip: req.body.zip
     }
-    projectData.push(newEntry);
-    res.send(projectData);
-    console.log('Posted data:'+projectData);
+    console.log('Posted data= '+newEntry[0]);
+    //app.push(newEntry);
+    res.send(newEntry);
+
 };
 
 app.get('/test',(req,res)=>{
