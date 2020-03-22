@@ -1,6 +1,6 @@
 // Setup empty JS object to act as endpoint for all routes
 
-projectData = {};
+//projectData = [];
 
 // Require Express to run server and routes
 const express = require('express');
@@ -27,22 +27,26 @@ app.use(express.static('website'));
 const port = 3000;
 /* Spin up the server*/
 const server = app.listen(port, listening);
- function listening(){
+  function listening(){
     console.log('running on a server');
     console.log(`running on localhost: ${port}`);
   };
 
   //GET
+
+projectData = [];
+
 app.get('/all', sendData);
 
 function sendData (req, res) {
-    res.send(projectData);
-    console.log(projectData);
+  console.log(projectData);
+  res.send(projectData);
+
 };
 
 //POST
 app.post('/saveData', saveData);
-// console.log('SaveData= '+saveData);
+// console.log(saveData);
 
 function saveData (req, res) {
 
@@ -52,8 +56,8 @@ function saveData (req, res) {
         input: req.body.input,
         zip: req.body.zip
     }
-    console.log('Posted data= '+newEntry[0]);
-    //app.push(newEntry);
+    //console.log(newEntry);
+    projectData.push(newEntry);
     res.send(newEntry);
 
 };
