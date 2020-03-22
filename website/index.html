@@ -8,22 +8,22 @@
   </head>
   <body>
     <div id = "app">
-      <div class ="holder headline">Weather Journal App</div>
+      <div class ="holder headline"><h3>Weather Journal App</h3></div>
       <div class ="holder zip">
         <label for="zip">Enter Zipcode here</label>
         <input type="text" id="zip" placeholder="enter zip code here">
       </div>
       <div class ="holder feel">
         <label for="feelings">How are you feeling today?</label>
-        <textarea class= "myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
+        <textarea class= "myInput" id="feelings" placeholder="Enter your feelings here" rows="5" cols="50"></textarea>
         <button id="generate" type = "submit"> Generate </button>
       </div>
       <div class ="holder entry">
         <div class = "title">Most Recent Entry</div>
         <div id = "entryHolder">
-          <h5>Date: <div id = "date" type = "date"></div></h5>
+          <h5>Date: <div id = "date"></div></h5>
           <h5>Current temp:<div id = "temp"></div></h5>
-          <h5>Zip code:<div id = "zip" type = "number"></div></h5>
+          <h5>Zip code:<div id = "zip"></div></h5>
           <h5>City:<div id = "city"></div></h5>
           <h5>I am feeling...<div id = "input"></div></h5>
         </div>

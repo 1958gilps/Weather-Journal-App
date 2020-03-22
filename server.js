@@ -38,7 +38,6 @@ projectData = [];
 app.get('/all', sendData);
 
 function sendData (req, res) {
-  console.log(projectData);
   res.send(projectData);
 
 };

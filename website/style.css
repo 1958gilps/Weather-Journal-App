@@ -5,19 +5,15 @@ body{
 
 #app{
     display: grid;
-    grid-auto-rows: minmax(150px, auto);
+    grid-auto-rows: minmax(125px, auto);
     /* grid-template-columns:  */
     height:100vh;
-    background: #f23557;
-    color: #f0d43a;
+    background: #e67e91;
+    color: #2e2b1b;
     justify-content: center;
     grid-gap: 1em;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
-}
-
-.holder{
-
 }
 
 .entry{
@@ -25,25 +21,17 @@ body{
 }
 
 #entryHolder{
+     background-color: lightskyblue;
 
 }
 
 #date{
+    display: block;
 
 }
 
-#temp{
-
-}
-
-#content{
-
-}
-
-.headline {
-
-}
 .title{
+    background-color: #e67e91;
 
 }
 

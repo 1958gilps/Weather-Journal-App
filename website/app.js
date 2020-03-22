@@ -12,7 +12,7 @@ document.getElementById('generate').addEventListener('click', performAction); //
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+'-'+ d.getDate()+'-'+ d.getFullYear(); // note zero based month
+let newDate = (d.getMonth()+1)+'-'+ d.getDate()+'-'+ d.getFullYear(); // note zero based month
 
 function performAction (e) { // e = MouseEvent {isTrusted: true, screenX: -1680, screenY: 669, clientX: 240, clientY: 690, …}
     const input = document.getElementById('feelings').value; // reads the feelings entered
@@ -36,7 +36,7 @@ const getWeather = async (url) =>{ // url = "http://api.openweathermap.org/data/
     console.log(response);
     try {
         const apiData = response.json();
-        console.log(apiData);
+        console.log(response);
         return apiData; // return weather data to .then function
 
     } catch (error) {
@@ -75,7 +75,7 @@ const updateUI = async () => {
 
         for (var i=0; i<serverData.length; i++) {
             document.getElementById('date').innerHTML = serverData[i].date;
-            document.getElementById('temp').innerHTML = serverData[i].temp+'°kelvin';
+            document.getElementById('temp').innerHTML = serverData[i].temp+' °kelvin';
             document.getElementById('zip').innerHTML = serverData[i].zip;
             document.getElementById('city').innerHTML = serverData[i].city;
             document.getElementById('input').innerHTML = serverData[i].input;
