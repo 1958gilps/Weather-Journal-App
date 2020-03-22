@@ -32,10 +32,9 @@ const server = app.listen(port, listening);
     console.log(`running on localhost: ${port}`);
   };
 
-  //GET
-
 projectData = [];
 
+//GET data from projectData[]
 app.get('/all', sendData);
 
 function sendData (req, res) {
@@ -44,19 +43,20 @@ function sendData (req, res) {
 
 };
 
-//POST
+//POST data to projectData[]
 app.post('/saveData', saveData);
-// console.log(saveData);
 
 function saveData (req, res) {
 
     const newEntry = {
         date: req.body.date,
         temp: req.body.temp,
+        zip: req.body.zip,
+        city: req.body.city,
         input: req.body.input,
-        zip: req.body.zip
+
     }
-    //console.log(newEntry);
+    console.log(newEntry);
     projectData.push(newEntry);
     res.send(newEntry);
 
