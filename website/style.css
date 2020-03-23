@@ -7,7 +7,7 @@ body{
     display: grid;
     grid-auto-rows: minmax(125px, auto);
     /* grid-template-columns:  */
-    height:100vh;
+    height:125vh;
     background: #e67e91;
     color: #2e2b1b;
     justify-content: center;

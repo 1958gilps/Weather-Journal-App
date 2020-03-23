@@ -16,7 +16,7 @@ let newDate = (d.getMonth()+1)+'-'+ d.getDate()+'-'+ d.getFullYear(); // note ze
 
 function performAction (e) { // e = MouseEvent {isTrusted: true, screenX: -1680, screenY: 669, clientX: 240, clientY: 690, …}
     const input = document.getElementById('feelings').value; // reads the feelings entered
-    const zipDisplay = document.getElementById('zip').value;
+    const zipDisplay = document.getElementById('zip').value; // reads the zip code entered
     getWeather(`${baseURL}${zip}${key}`) // jumps to getWeather
 
     .then(function(apiData) { // apiData = {coord: {…}, weather: Array(1), base: "stations", main: {…}, visibility: 16093, ...}
@@ -31,12 +31,12 @@ function performAction (e) { // e = MouseEvent {isTrusted: true, screenX: -1680,
 
 //GET async
 const getWeather = async (url) =>{ // url = "http://api.openweathermap.org/data/2.5/weather?q=[object HTMLInputElement]&APPID=f5df508e3320a305491c8da09aba3fd8"
-    const zip = document.getElementById('zip').value; // reads the zip code entered // zip = "01754"
+    const zip = document.getElementById('zip').value; // reads the zip code entered for the url
     const response = await fetch (`${baseURL}${zip}${key}`); // url response = Response {type: "cors", url: "http://api.openweathermap.org/data/2.5/weather?zip=01754&appid=f5df508e3320a305491c8da09aba3fd8", redirected: 
-    console.log(response);
+    
     try {
         const apiData = response.json();
-        console.log(response);
+        //console.log(apiData); // view response in json
         return apiData; // return weather data to .then function
 
     } catch (error) {
@@ -46,14 +46,14 @@ const getWeather = async (url) =>{ // url = "http://api.openweathermap.org/data/
 
 //POST async
 const postData = async function ( url='',data = {}) { // url = "/saveData", data = {date: "2-21-2020", temp: 276.56, input: "sssssssssssssssssssss", zip: HTMLCollection(2)}
-    console.log(data);
-    const res = await fetch (url, {
+    // console.log(data); // data to be posted
+    const res = await fetch (url, {  // url = "/saveData"
         method:'POST',
         credentials:'same-origin',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data), // 
+        body: JSON.stringify(data), // data = {date: "3-22-2020", temp: 272.84, zip: "01090", city: "West Springfield", input: "Good today"
     });
 
     try {
@@ -68,15 +68,16 @@ const postData = async function ( url='',data = {}) { // url = "/saveData", data
 
 //update UI
 const updateUI = async () => {
-    const request = await fetch ('/all')
+    const request = await fetch ('/all') // request = Response {type: "basic", url: "http://localhost:3000/all/", redirected: true, status: 200, ok: true, …}
     try{
         const serverData = await request.json()
         console.log(serverData);
 
         for (var i=0; i<serverData.length; i++) {
+            
             document.getElementById('date').innerHTML = serverData[i].date;
-            document.getElementById('temp').innerHTML = serverData[i].temp+' °kelvin';
-            document.getElementById('zip').innerHTML = serverData[i].zip;
+            document.getElementById('temp').innerHTML = serverData[i].temp+' °Fahrenheit';
+            document.getElementById('zip').innerText = serverData[i].zip;
             document.getElementById('city').innerHTML = serverData[i].city;
             document.getElementById('input').innerHTML = serverData[i].input;
 

@@ -49,7 +49,7 @@ function saveData (req, res) {
 
     const newEntry = {
         date: req.body.date,
-        temp: req.body.temp,
+        temp: req.body.temp*1.8-459.67,
         zip: req.body.zip,
         city: req.body.city,
         input: req.body.input,
